@@ -68,7 +68,6 @@ window.addEventListener("DOMContentLoaded", () => {
     popularity.setAttribute("id", "popularity-count")
     popularity.innerText = `Popularity Score: ${count}`
 
-
     body.append(popularity)
     body.appendChild(commentArea)
     body.appendChild(commentSubmit)
