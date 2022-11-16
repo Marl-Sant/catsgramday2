@@ -28,6 +28,15 @@ window.addEventListener("DOMContentLoaded", () => {
         let header = document.getElementsByTagName("h1")
         header[0].remove()
         createMainContent()
+        upCount = 0
+        upvoteButton.innerText = `Likes: ${upCount}`
+        downCount = 0
+        downvoteButton.innerText = `Likes: ${downCount}`
+        const newList = document.querySelectorAll("li")
+        newList.forEach(li => {
+            li.remove()
+        })
+        
     })
 
     const upvoteButton = document.createElement("button")
@@ -41,18 +50,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
     upvoteButton.addEventListener("click", (e) => {
         e.preventDefault()
-        upvoteButton.innerText = `Likes: ${upCount++}`
+        upvoteButton.innerText = `Likes: ${++upCount}`
     })
 
     downvoteButton.addEventListener("click", () => {
-        downvoteButton.innerText = `Dislikes: ${downCount++}`
+        downvoteButton.innerText = `Dislikes: ${++downCount}`
     })
 
     const commentArea = document.createElement("input")
     commentArea.dataset.type = "text"
+    commentArea.setAttribute("id", "comment-box")
+    commentArea.setAttribute("placeholder", "Comment here!")
     const commentSubmit = document.createElement("button")
     commentSubmit.innerText = "Submit"
     const commentTable = document.createElement("ul")
+    commentTable.setAttribute("id", "comments")
     commentTable.innerText = "COMMENTS"
 
 
@@ -62,7 +74,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
     commentSubmit.addEventListener("click", (e) => {
         e.preventDefault()
+        let newComment = document.createElement("li")
+        commentTable.appendChild(newComment)
         
+        const commentBox = document.getElementById("comment-box").value
+        
+        newComment.innerText = `${commentBox}`
+        commentArea.value = ""
     })
 
 })
