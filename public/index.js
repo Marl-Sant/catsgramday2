@@ -28,33 +28,32 @@ window.addEventListener("DOMContentLoaded", () => {
         let header = document.getElementsByTagName("h1")
         header[0].remove()
         createMainContent()
-        upCount = 0
-        upvoteButton.innerText = `Likes: ${upCount}`
-        downCount = 0
-        downvoteButton.innerText = `Likes: ${downCount}`
+        count = 0
+        upvoteButton.innerText = `Upvote`
+        downvoteButton.innerText = `Downvote`
+        popularity.innerText = `Popularity Score: ${count}`
         const newList = document.querySelectorAll("li")
         newList.forEach(li => {
             li.remove()
         })
-        
+
     })
 
     const upvoteButton = document.createElement("button")
     const downvoteButton = document.createElement("button")
     body.appendChild(upvoteButton)
     body.appendChild(downvoteButton)
-    let upCount = 0
-    let downCount = 0
-    upvoteButton.innerText = `Likes: ${upCount}`
-    downvoteButton.innerText = `Dislikes: ${downCount}`
+    let count = 0
+    upvoteButton.innerText = `Upvote`
+    downvoteButton.innerText = `Downvote`
 
     upvoteButton.addEventListener("click", (e) => {
         e.preventDefault()
-        upvoteButton.innerText = `Likes: ${++upCount}`
+        popularity.innerText = `Popularity Score: ${++count}`
     })
 
     downvoteButton.addEventListener("click", () => {
-        downvoteButton.innerText = `Dislikes: ${++downCount}`
+        popularity.innerText = `Popularity Score: ${--count}`
     })
 
     const commentArea = document.createElement("input")
@@ -65,9 +64,12 @@ window.addEventListener("DOMContentLoaded", () => {
     commentSubmit.innerText = "Submit"
     const commentTable = document.createElement("ul")
     commentTable.setAttribute("id", "comments")
-    commentTable.innerText = "COMMENTS"
+    const popularity = document.createElement("h3")
+    popularity.setAttribute("id", "popularity-count")
+    popularity.innerText = `Popularity Score: ${count}`
 
 
+    body.append(popularity)
     body.appendChild(commentArea)
     body.appendChild(commentSubmit)
     body.appendChild(commentTable)
@@ -76,9 +78,9 @@ window.addEventListener("DOMContentLoaded", () => {
         e.preventDefault()
         let newComment = document.createElement("li")
         commentTable.appendChild(newComment)
-        
+
         const commentBox = document.getElementById("comment-box").value
-        
+
         newComment.innerText = `${commentBox}`
         commentArea.value = ""
     })
